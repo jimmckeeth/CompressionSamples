@@ -9,13 +9,16 @@
         <Projects Include="ObjectPascal\RestZlib\RestZlibDemo.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Cpp\zLibCppDemo.cbproj">
-            <Dependencies/>
-        </Projects>
         <Projects Include="Cpp\RestZlibCpp\RestZlibCppDemo.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Cpp\ZilFile\ZipFileCppDemo.cbproj">
+        <Projects Include="Cpp\ZipFile\ZipFileCppDemo.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Cpp\ZlibDemo\zLibCppDemo.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ObjectPascal\ZipFile\ZipFileDemo.dproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -44,15 +47,6 @@
     <Target Name="RestZlibDemo:Make">
         <MSBuild Projects="ObjectPascal\RestZlib\RestZlibDemo.dproj" Targets="Make"/>
     </Target>
-    <Target Name="zLibCppDemo">
-        <MSBuild Projects="Cpp\zLibCppDemo.cbproj"/>
-    </Target>
-    <Target Name="zLibCppDemo:Clean">
-        <MSBuild Projects="Cpp\zLibCppDemo.cbproj" Targets="Clean"/>
-    </Target>
-    <Target Name="zLibCppDemo:Make">
-        <MSBuild Projects="Cpp\zLibCppDemo.cbproj" Targets="Make"/>
-    </Target>
     <Target Name="RestZlibCppDemo">
         <MSBuild Projects="Cpp\RestZlibCpp\RestZlibCppDemo.cbproj"/>
     </Target>
@@ -63,22 +57,40 @@
         <MSBuild Projects="Cpp\RestZlibCpp\RestZlibCppDemo.cbproj" Targets="Make"/>
     </Target>
     <Target Name="ZipFileCppDemo">
-        <MSBuild Projects="Cpp\ZilFile\ZipFileCppDemo.cbproj"/>
+        <MSBuild Projects="Cpp\ZipFile\ZipFileCppDemo.cbproj"/>
     </Target>
     <Target Name="ZipFileCppDemo:Clean">
-        <MSBuild Projects="Cpp\ZilFile\ZipFileCppDemo.cbproj" Targets="Clean"/>
+        <MSBuild Projects="Cpp\ZipFile\ZipFileCppDemo.cbproj" Targets="Clean"/>
     </Target>
     <Target Name="ZipFileCppDemo:Make">
-        <MSBuild Projects="Cpp\ZilFile\ZipFileCppDemo.cbproj" Targets="Make"/>
+        <MSBuild Projects="Cpp\ZipFile\ZipFileCppDemo.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="zLibCppDemo">
+        <MSBuild Projects="Cpp\ZlibDemo\zLibCppDemo.cbproj"/>
+    </Target>
+    <Target Name="zLibCppDemo:Clean">
+        <MSBuild Projects="Cpp\ZlibDemo\zLibCppDemo.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="zLibCppDemo:Make">
+        <MSBuild Projects="Cpp\ZlibDemo\zLibCppDemo.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="ZipFileDemo">
+        <MSBuild Projects="ObjectPascal\ZipFile\ZipFileDemo.dproj"/>
+    </Target>
+    <Target Name="ZipFileDemo:Clean">
+        <MSBuild Projects="ObjectPascal\ZipFile\ZipFileDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ZipFileDemo:Make">
+        <MSBuild Projects="ObjectPascal\ZipFile\ZipFileDemo.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="ZLibDemo;RestZlibDemo;zLibCppDemo;RestZlibCppDemo;ZipFileCppDemo"/>
+        <CallTarget Targets="ZLibDemo;RestZlibDemo;RestZlibCppDemo;ZipFileCppDemo;zLibCppDemo;ZipFileDemo"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="ZLibDemo:Clean;RestZlibDemo:Clean;zLibCppDemo:Clean;RestZlibCppDemo:Clean;ZipFileCppDemo:Clean"/>
+        <CallTarget Targets="ZLibDemo:Clean;RestZlibDemo:Clean;RestZlibCppDemo:Clean;ZipFileCppDemo:Clean;zLibCppDemo:Clean;ZipFileDemo:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="ZLibDemo:Make;RestZlibDemo:Make;zLibCppDemo:Make;RestZlibCppDemo:Make;ZipFileCppDemo:Make"/>
+        <CallTarget Targets="ZLibDemo:Make;RestZlibDemo:Make;RestZlibCppDemo:Make;ZipFileCppDemo:Make;zLibCppDemo:Make;ZipFileDemo:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

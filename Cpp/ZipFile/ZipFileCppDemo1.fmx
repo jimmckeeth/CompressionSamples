@@ -1,7 +1,7 @@
 object Form29: TForm29
   Left = 0
   Top = 0
-  Caption = 'Form29'
+  Caption = 'Zip File C++ Demo'
   ClientHeight = 496
   ClientWidth = 273
   FormFactor.Width = 320

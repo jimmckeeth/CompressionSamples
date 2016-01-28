@@ -1,7 +1,7 @@
 object Form7: TForm7
   Left = 0
   Top = 0
-  Caption = 'Form7'
+  Caption = 'Zlib C++ Demo'
   ClientHeight = 480
   ClientWidth = 265
   FormFactor.Width = 320
@@ -181,12 +181,12 @@ object Form7: TForm7
           ''
           'end.')
         Align = Client
-        Size.Width = 265.000000000000000000
-        Size.Height = 404.000000000000000000
+        Size.Width = 50.000000000000000000
+        Size.Height = 50.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
-        Viewport.Width = 245.000000000000000000
-        Viewport.Height = 384.000000000000000000
+        Viewport.Width = 30.000000000000000000
+        Viewport.Height = 30.000000000000000000
       end
     end
     object TabItem2: TTabItem
