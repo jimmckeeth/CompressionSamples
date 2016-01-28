@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{29A9C6EE-4519-481C-927C-D54DC4F93A42}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Zlib\ZLibDemo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="RestZlib\RestZlibDemo.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ZLibDemo">
+        <MSBuild Projects="Zlib\ZLibDemo.dproj"/>
+    </Target>
+    <Target Name="ZLibDemo:Clean">
+        <MSBuild Projects="Zlib\ZLibDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ZLibDemo:Make">
+        <MSBuild Projects="Zlib\ZLibDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="RestZlibDemo">
+        <MSBuild Projects="RestZlib\RestZlibDemo.dproj"/>
+    </Target>
+    <Target Name="RestZlibDemo:Clean">
+        <MSBuild Projects="RestZlib\RestZlibDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="RestZlibDemo:Make">
+        <MSBuild Projects="RestZlib\RestZlibDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ZLibDemo;RestZlibDemo"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ZLibDemo:Clean;RestZlibDemo:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ZLibDemo:Make;RestZlibDemo:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

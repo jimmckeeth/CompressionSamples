@@ -1,0 +1,262 @@
+object Form7: TForm7
+  Left = 0
+  Top = 0
+  Caption = 'Form7'
+  ClientHeight = 480
+  ClientWidth = 265
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object TabControl1: TTabControl
+    Align = Client
+    Size.Width = 265.000000000000000000
+    Size.Height = 430.000000000000000000
+    Size.PlatformDefault = False
+    TabIndex = 1
+    TabOrder = 0
+    TabPosition = PlatformDefault
+    object TabItem1: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Size.Width = 48.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Input'
+      ExplicitSize.cx = 48.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
+      object Memo1: TMemo
+        Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+        DataDetectorTypes = []
+        Lines.Strings = (
+          'unit ZLibDemoUnit1;'
+          ''
+          'interface'
+          ''
+          'uses'
+          
+            '  System.SysUtils, System.Types, System.UITypes, System.Classes,' +
+            ' System.Variants,'
+          '  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,'
+          ''
+          '  System.ZLib,'
+          ''
+          '  FMX.ScrollBox,'
+          
+            '  FMX.Memo, FMX.StdCtrls, FMX.Edit, FMX.Controls.Presentation, F' +
+            'MX.Layouts,'
+          '  FMX.TabControl, FMX.ListBox;'
+          ''
+          'type'
+          '  TForm27 = class(TForm)'
+          '    Memo1: TMemo;'
+          '    TabControl1: TTabControl;'
+          '    TabItem1: TTabItem;'
+          '    Layout1: TLayout;'
+          '    btnCompress: TButton;'
+          '    TabItem2: TTabItem;'
+          '    ListBox1: TListBox;'
+          '    TabItem3: TTabItem;'
+          '    Memo2: TMemo;'
+          '    procedure btnCompressClick(Sender: TObject);'
+          '  private'
+          
+            '    procedure TestCompression(compressionLevel: TCompressionLeve' +
+            'l);'
+          '    { Private declarations }'
+          '  public'
+          '    { Public declarations }'
+          '  end;'
+          ''
+          'var'
+          '  Form27: TForm27;'
+          ''
+          'implementation'
+          ''
+          '{$R *.fmx}'
+          ''
+          'uses'
+          '  System.IOUtils, System.Hash, System.TypInfo;'
+          ''
+          
+            'procedure TForm27.TestCompression(compressionLevel: TCompression' +
+            'Level);'
+          'var'
+          '  DeHash: string;'
+          '  UnHash: string;'
+          '  LUncompressed: TStringStream;'
+          '  LCompressed: TMemoryStream;'
+          '  LCompress: TZCompressionStream;'
+          '  LDecompress: TZDecompressionStream;'
+          'begin'
+          '  LUncompressed := nil;'
+          '  LCompressed := nil;'
+          '  LCompress := nil;'
+          '  LDecompress := nil;'
+          '  try'
+          '    //--------------'
+          '    // Compression'
+          '    //--------------'
+          '    // Holds uncompressed data'
+          '    LUncompressed := TStringStream.Create;'
+          '    // Holds compressed data'
+          '    LCompressed := TMemoryStream.Create;'
+          
+            '    // Compresses the data with maximum compression and a destin' +
+            'ation'
+          
+            '    LCompress := TCompressionStream.Create(compressionLevel, LCo' +
+            'mpressed);'
+          '    // Load the uncompressed data'
+          '    LUncompressed.WriteString(Memo1.Text);'
+          '    LUncompressed.Position := 0;'
+          '    // Perform compression'
+          '    LCompress.CopyFrom(LUncompressed, LUncompressed.Size);'
+          
+            '    // Free compressor before output stream so it flushes the bu' +
+            'ffers'
+          '    FreeAndNil(LCompress);'
+          '    //---------------'
+          '    // Decompression'
+          '    //---------------'
+          '    // Read from the start of the steam'
+          '    LCompressed.Position := 0;'
+          '    // Specify the source'
+          '    LDecompress := TZDecompressionStream.Create(LCompressed);'
+          '    // reusing the stream'
+          '    LUncompressed.Clear;'
+          '    // Decompress'
+          '    LUncompressed.CopyFrom(LDecompress, LDecompress.Size);'
+          '    Memo2.Text := LUncompressed.DataString;'
+          '    //--------------'
+          '    // Log the data'
+          '    //--------------'
+          '    ListBox1.Items.Add('#39'--------'#39');'
+          '    ListBox1.Items.Add('#39'Using '#39' + GetEnumName('
+          
+            '      System.TypeInfo(TCompressionLevel), ord(compressionLevel))' +
+            ');'
+          '    ListBox1.Items.Add(Format('#39'Sizes: %d / %d / %d'#39','
+          
+            '       [Memo1.Text.Length, LCompressed.Size, Memo2.Text.Length])' +
+            ');'
+          
+            '    ListBox1.Items.Add(Format('#39'Ratio: %f'#39', [LCompressed.Size / M' +
+            'emo1.Text.Length]));'
+          '    UnHash := THashBobJenkins.GetHashString(Memo1.Text);'
+          '    DeHash := THashBobJenkins.GetHashString(Memo2.Text);'
+          '    // Test the hashes'
+          '    if UnHash = DeHash then'
+          
+            '      ListBox1.Items.Add(Format('#39'Hashes: %s / %s Match'#39', [UnHash' +
+            ', DeHash]))'
+          '    else'
+          
+            '      ListBox1.Items.Add(Format('#39'Hashes: %s / %s Fail'#39', [UnHash,' +
+            ' DeHash]));'
+          '    //-----------'
+          '    // Clean-up'
+          '    //-----------'
+          '    finally'
+          '      LCompress.Free;'
+          '      LDecompress.Free;'
+          '      LUncompressed.Free;'
+          '      LCompressed.Free;'
+          '    end;'
+          'end;'
+          ''
+          'procedure TForm27.btnCompressClick(Sender: TObject);'
+          'begin'
+          '  ListBox1.Clear;'
+          '  TabControl1.ActiveTab := TabItem2;'
+          '  TestCompression(clNone);'
+          '  TestCompression(clFastest);'
+          '  TestCompression(clDefault);'
+          '  TestCompression(clMax);'
+          'end;'
+          ''
+          'end.')
+        Align = Client
+        Size.Width = 265.000000000000000000
+        Size.Height = 404.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Viewport.Width = 245.000000000000000000
+        Viewport.Height = 384.000000000000000000
+      end
+    end
+    object TabItem2: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = True
+      Size.Width = 57.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Results'
+      ExplicitSize.cx = 57.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
+      object ListBox1: TListBox
+        Align = Client
+        Size.Width = 265.000000000000000000
+        Size.Height = 404.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        DisableFocusEffect = True
+        DefaultItemStyles.ItemStyle = ''
+        DefaultItemStyles.GroupHeaderStyle = ''
+        DefaultItemStyles.GroupFooterStyle = ''
+        Viewport.Width = 261.000000000000000000
+        Viewport.Height = 400.000000000000000000
+      end
+    end
+    object TabItem3: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Size.Width = 58.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Output'
+      ExplicitSize.cx = 58.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
+      object Memo2: TMemo
+        Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+        DataDetectorTypes = []
+        Align = Client
+        Size.Width = 50.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Viewport.Width = 46.000000000000000000
+        Viewport.Height = 46.000000000000000000
+      end
+    end
+  end
+  object Layout1: TLayout
+    Align = Top
+    Size.Width = 265.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object btnCompress: TButton
+      Position.X = 16.000000000000000000
+      Position.Y = 12.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = 'Compress'
+      OnClick = btnCompressClick
+    end
+  end
+end

@@ -1,0 +1,165 @@
+object Form27: TForm27
+  Left = 0
+  Top = 0
+  Caption = 'Form27'
+  ClientHeight = 480
+  ClientWidth = 640
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object TabControl1: TTabControl
+    Align = Client
+    Size.Width = 640.000000000000000000
+    Size.Height = 430.000000000000000000
+    Size.PlatformDefault = False
+    TabIndex = 0
+    TabOrder = 4
+    TabPosition = PlatformDefault
+    object TabItem1: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = True
+      Size.Width = 48.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'JSON'
+      ExplicitSize.cx = 67.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
+      object Memo1: TMemo
+        Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+        DataDetectorTypes = []
+        TextSettings.WordWrap = True
+        Align = Client
+        Size.Width = 640.000000000000000000
+        Size.Height = 404.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 4
+        Viewport.Width = 636.000000000000000000
+        Viewport.Height = 400.000000000000000000
+      end
+    end
+    object TabItem2: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Size.Width = 42.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Grid'
+      ExplicitSize.cx = 68.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
+      object Grid1: TGrid
+        Align = Client
+        Size.Width = 640.000000000000000000
+        Size.Height = 404.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        RowCount = 100
+        RowHeight = 21.000000000000000000
+        Viewport.Width = 636.000000000000000000
+        Viewport.Height = 379.000000000000000000
+      end
+    end
+  end
+  object Layout1: TLayout
+    Align = Top
+    Size.Width = 640.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 5
+    object Button1: TButton
+      Position.X = 16.000000000000000000
+      Position.Y = 16.000000000000000000
+      TabOrder = 0
+      Text = 'Fetch'
+      OnClick = Button1Click
+    end
+  end
+  object RESTClient1: TRESTClient
+    Accept = 'application/json, text/plain; q=0.9, text/html;q=0.8,'
+    AcceptCharset = 'UTF-8, *;q=0.8'
+    AcceptEncoding = 'deflate'
+    BaseURL = 
+      'https://api.stackexchange.com/2.2/questions?order=desc&sort=acti' +
+      'vity&tagged=delphi*&site=stackoverflow'
+    Params = <>
+    HandleRedirects = True
+    RaiseExceptionOn500 = False
+    Left = 40
+    Top = 128
+  end
+  object RESTResponse1: TRESTResponse
+    RootElement = 'items'
+    Left = 40
+    Top = 240
+  end
+  object RESTResponseDataSetAdapter1: TRESTResponseDataSetAdapter
+    Dataset = FDMemTable1
+    FieldDefs = <>
+    Response = RESTResponse1
+    Left = 112
+    Top = 144
+  end
+  object FDMemTable1: TFDMemTable
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 112
+    Top = 208
+  end
+  object BindSourceDB1: TBindSourceDB
+    DataSet = FDMemTable1
+    ScopeMappings = <>
+    Left = 304
+    Top = 224
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 164
+    Top = 13
+    object LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      GridControl = Grid1
+      Columns = <>
+    end
+  end
+  object RESTRequest1: TRESTRequest
+    AcceptEncoding = 'gzip'
+    Client = RESTClient1
+    Params = <
+      item
+        name = 'order'
+        Value = 'desc'
+      end
+      item
+        name = 'sort'
+        Value = 'activity'
+      end
+      item
+        name = 'tagged'
+        Value = 'delphi*'
+      end
+      item
+        name = 'site'
+        Value = 'stackoverflow'
+      end>
+    Response = RESTResponse1
+    OnAfterExecute = RESTRequest1AfterExecute
+    SynchronizedEvents = False
+    Left = 40
+    Top = 184
+  end
+end
