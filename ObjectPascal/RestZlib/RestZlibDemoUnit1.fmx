@@ -1,16 +1,16 @@
 object Form27: TForm27
   Left = 0
   Top = 0
-  Caption = 'Form27'
+  Caption = 'Stack Overflow API Example - REST, HTTPS, GZIP, JSON'
   ClientHeight = 480
-  ClientWidth = 640
+  ClientWidth = 664
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   DesignerMasterStyle = 0
   object TabControl1: TTabControl
     Align = Client
-    Size.Width = 640.000000000000000000
+    Size.Width = 664.000000000000000000
     Size.Height = 430.000000000000000000
     Size.PlatformDefault = False
     TabIndex = 0
@@ -34,11 +34,11 @@ object Form27: TForm27
         DataDetectorTypes = []
         TextSettings.WordWrap = True
         Align = Client
-        Size.Width = 640.000000000000000000
+        Size.Width = 664.000000000000000000
         Size.Height = 404.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 4
-        Viewport.Width = 636.000000000000000000
+        Viewport.Width = 660.000000000000000000
         Viewport.Height = 400.000000000000000000
       end
     end
@@ -57,20 +57,20 @@ object Form27: TForm27
       ExplicitSize.cy = 26.000000000000000000
       object Grid1: TGrid
         Align = Client
-        Size.Width = 640.000000000000000000
-        Size.Height = 404.000000000000000000
+        Size.Width = 50.000000000000000000
+        Size.Height = 50.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         RowCount = 100
         RowHeight = 21.000000000000000000
-        Viewport.Width = 636.000000000000000000
-        Viewport.Height = 379.000000000000000000
+        Viewport.Width = 46.000000000000000000
+        Viewport.Height = 25.000000000000000000
       end
     end
   end
   object Layout1: TLayout
     Align = Top
-    Size.Width = 640.000000000000000000
+    Size.Width = 664.000000000000000000
     Size.Height = 50.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 5
@@ -85,27 +85,27 @@ object Form27: TForm27
   object RESTClient1: TRESTClient
     Accept = 'application/json, text/plain; q=0.9, text/html;q=0.8,'
     AcceptCharset = 'UTF-8, *;q=0.8'
-    AcceptEncoding = 'deflate'
-    BaseURL = 
-      'https://api.stackexchange.com/2.2/questions?order=desc&sort=acti' +
-      'vity&tagged=delphi*&site=stackoverflow'
+    AcceptEncoding = 'gzip'
+    BaseURL = 'https://api.stackexchange.com/2.2/questions'
     Params = <>
     HandleRedirects = True
     RaiseExceptionOn500 = False
     Left = 40
-    Top = 128
+    Top = 112
   end
   object RESTResponse1: TRESTResponse
+    ContentType = 'application/json'
+    ContentEncoding = 'gzip'
     RootElement = 'items'
     Left = 40
-    Top = 240
+    Top = 208
   end
   object RESTResponseDataSetAdapter1: TRESTResponseDataSetAdapter
     Dataset = FDMemTable1
     FieldDefs = <>
     Response = RESTResponse1
-    Left = 112
-    Top = 144
+    Left = 40
+    Top = 256
   end
   object FDMemTable1: TFDMemTable
     FetchOptions.AssignedValues = [evMode]
@@ -115,20 +115,20 @@ object Form27: TForm27
     UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
-    Left = 112
-    Top = 208
+    Left = 40
+    Top = 304
   end
   object BindSourceDB1: TBindSourceDB
     DataSet = FDMemTable1
     ScopeMappings = <>
-    Left = 304
-    Top = 224
+    Left = 40
+    Top = 352
   end
   object BindingsList1: TBindingsList
     Methods = <>
     OutputConverters = <>
-    Left = 164
-    Top = 13
+    Left = 40
+    Top = 400
     object LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource
       Category = 'Quick Bindings'
       DataSource = BindSourceDB1
@@ -160,6 +160,6 @@ object Form27: TForm27
     OnAfterExecute = RESTRequest1AfterExecute
     SynchronizedEvents = False
     Left = 40
-    Top = 184
+    Top = 160
   end
 end
